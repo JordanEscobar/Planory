@@ -1,0 +1,7 @@
+{
+  "name": "planory",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
