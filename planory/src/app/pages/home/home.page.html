@@ -1,20 +1,42 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Planory
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-button (click)="filtro = 'pendientes' " color="secondary">Pendientes</ion-button>
+<ion-button (click)="filtro = 'completadas' " color="success">Completadas</ion-button>
+<ion-button (click)="filtro = 'todas'">Todas</ion-button>
+
+<ion-input placeholder="Título de la tarea" [(ngModel)]="titulo"></ion-input>
+<ion-input placeholder="Descripción de la tarea" [(ngModel)]="descripcion"></ion-input>
+<ion-button expand="full" (click)="agregarTarea()">Agregar Tarea</ion-button>
+
+<ion-list>
+  <ion-item *ngFor="let ta of tareasFiltradas; let i = index">
+    <ion-label>
+      <h2>{{ta.title}}</h2>
+      <p>{{ta.description}}</p>
+      <p>Status: {{ta.status}}</p>
+      <p>{{ta.date}}</p>
+    </ion-label>
+
+    <ion-button color="danger" (click)="marcarListo(ta)" *ngIf="ta.status === 'pendiente' ">
+      Marcar como terminada
+    </ion-button>
+
+    <ion-button size="small" color="success" *ngIf="ta.status === 'completada'">
+      ✔ Hecho
+    </ion-button>
+
+  </ion-item>
+</ion-list>
+
+
+
+
 </ion-content>
