@@ -8,12 +8,17 @@
 
 <ion-content [fullscreen]="true">
 
+
 <ion-button (click)="filtro = 'pendientes' " color="secondary">Pendientes</ion-button>
 <ion-button (click)="filtro = 'completadas' " color="success">Completadas</ion-button>
 <ion-button (click)="filtro = 'todas'">Todas</ion-button>
 
-<ion-input placeholder="Título de la tarea" [(ngModel)]="titulo"></ion-input>
-<ion-input placeholder="Descripción de la tarea" [(ngModel)]="descripcion"></ion-input>
+  <ion-item>
+    <ion-input labelPlacement="stacked" fill="outline" placeholder="Título de la tarea" [(ngModel)]="titulo"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-textarea fill="outline" placeholder="Descripción de la tarea" [(ngModel)]="descripcion"></ion-textarea>
+  </ion-item>
 <ion-button expand="full" (click)="agregarTarea()">Agregar Tarea</ion-button>
 
 <ion-list>
@@ -22,11 +27,12 @@
       <h2>{{ta.title}}</h2>
       <p>{{ta.description}}</p>
       <p>Status: {{ta.status}}</p>
-      <p>{{ta.date}}</p>
+      <p>{{ta.date | date:'dd/MM/yyyy HH:mm' }}</p>
     </ion-label>
 
     <ion-button color="danger" (click)="marcarListo(ta)" *ngIf="ta.status === 'pendiente' ">
-      Marcar como terminada
+      <ion-icon name="checkmark"></ion-icon>
+      Completar
     </ion-button>
 
     <ion-button size="small" color="success" *ngIf="ta.status === 'completada'">

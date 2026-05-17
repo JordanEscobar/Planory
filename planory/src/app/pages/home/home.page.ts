@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
-import { IonHeader,IonLabel, IonToolbar,IonList,IonItem, IonTitle, IonContent, IonButton, IonInput } from '@ionic/angular/standalone';
+import { IonHeader, IonLabel, IonIcon, IonToolbar, IonList, IonItem, IonTitle, IonContent, IonButton, IonInput, IonTextarea } from '@ionic/angular/standalone';
 import { Task } from 'src/app/core/models/task.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {addIcons} from 'ionicons';
+import { checkmark } from 'ionicons/icons';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonList, IonItem, IonToolbar, IonButton, IonTitle, CommonModule, FormsModule, IonContent, IonInput, IonLabel],
+  imports: [IonHeader, IonList, IonItem, IonToolbar, IonButton, IonTitle, CommonModule, FormsModule, IonContent, IonInput, IonLabel, IonIcon, IonTextarea],
 })
 export class HomePage {
 
-  constructor() {}
+  constructor() {
+    addIcons({checkmark});
+  }
 
   titulo = '';
   descripcion = '';
