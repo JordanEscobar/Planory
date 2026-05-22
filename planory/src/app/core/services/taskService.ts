@@ -16,6 +16,10 @@ export class TaskService {
     return this.tasks.filter(t => t.status === 'pendiente').length;
   }
 
+  getCompletedCount(): number {
+    return this.tasks.filter(t => t.status === 'completada').length;
+  }
+
   loadTasks(): void{
     const data = localStorage.getItem('tareas');
     if(data){

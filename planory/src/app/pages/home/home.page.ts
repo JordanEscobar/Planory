@@ -23,6 +23,8 @@ export class HomePage {
   filtro:string = 'todas';
 
   tareasPCount:number = 0;
+  tareasCcount:number = 0;
+  tareasTcount: number = 0;
 
   constructor(private taskService: TaskService){
     addIcons({checkmark});
@@ -34,7 +36,9 @@ export class HomePage {
     if(data){
       this.tareas = JSON.parse(data) as Task[];
     }
+    this.tareasTcount = this.tareas.length;
     this.tareasPCount = this.taskService.getPendingCount();
+    this.tareasCcount = this.taskService.getCompletedCount();
   }
 
 
