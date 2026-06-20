@@ -10,4 +10,16 @@
       <ion-title size="large">add-task</ion-title>
     </ion-toolbar>
   </ion-header>
+
+
+  <ion-input label="Título de la tarea" [(ngModel)]="title" label-placement="floating" fill="outline" placeholder="Ingresa el título"></ion-input>
+
+  <ion-input label="Descripción de la tarea" [(ngModel)]="description" label-placement="floating" fill="outline" placeholder="Ingresa la descripción"></ion-input>
+
+    <div class="btncontainer">
+    <ion-button shape="round" (click)="addTask()">Agregar Tarea</ion-button>
+  </div>
+
+
+
 </ion-content>

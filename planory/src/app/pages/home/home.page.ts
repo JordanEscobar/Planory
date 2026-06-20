@@ -1,6 +1,6 @@
 import { Task } from './../../core/models/task.model';
 import { Component } from '@angular/core';
-import { IonHeader, IonLabel, IonIcon, IonToolbar, IonList, IonItem, IonTitle, IonContent, IonButton, IonInput, IonTextarea } from '@ionic/angular/standalone';
+import { IonHeader, IonLabel, IonIcon, IonToolbar, IonList, IonItem, IonTitle, IonContent, IonButton, IonBadge } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {addIcons} from 'ionicons';
@@ -13,7 +13,7 @@ import { TaskService } from '../../core/services/taskService';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonList, IonItem, IonToolbar, IonButton, IonTitle, CommonModule, FormsModule, IonContent, IonInput, IonLabel, IonIcon, IonTextarea],
+  imports: [IonBadge, IonHeader, IonList, IonItem, IonToolbar, IonButton, IonTitle, CommonModule, FormsModule, IonContent, IonLabel, IonIcon],
 })
 export class HomePage {
 
@@ -31,14 +31,11 @@ export class HomePage {
 
   }
   
-  ngOnInit(){
-    const data = localStorage.getItem('tareas');
-    if(data){
-      this.tareas = JSON.parse(data) as Task[];
-    }
+  ionViewWillEnter(){
+    this.tareas = this.taskService.getTasks();
     this.tareasTcount = this.tareas.length;
-    this.tareasPCount = this.taskService.getPendingCount();
-    this.tareasCcount = this.taskService.getCompletedCount();
+    this.tareasPCount = this.tareas.filter(t => t.status === 'pendiente').length;
+    this.tareasCcount = this.tareas.filter(t => t.status === 'completada').length;
   }
 
 
@@ -52,22 +49,6 @@ export class HomePage {
       return this.tareas.filter(t => t.status === 'completada');
     }
     return this.tareas;
-  }
-
-  agregarTarea(){
-    if(!this.titulo || !this.descripcion)return;
-
-    const nuevaTask: Task = {
-      id: Date.now(),
-      title: this.titulo,
-      description: this.descripcion,
-      date: new Date(),
-      status: 'pendiente'
-    };
-    this.tareas.push(nuevaTask);
-    localStorage.setItem('tareas', JSON.stringify(this.tareas));
-    this.titulo = '';
-    this.descripcion = '';
   }
 
   marcarListo(tarea: Task){

@@ -2,50 +2,32 @@
   <ion-toolbar>
     <ion-title>
       Planory
+      <ion-badge color="danger">{{tareasPCount}}</ion-badge>
     </ion-title>
+
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-
 <div class="btncontainer">
-  <ion-button (click)="filtro = 'pendientes' " color="secondary">Pendientes - {{ tareasPCount }}</ion-button>
-  <ion-button (click)="filtro = 'completadas' " color="success">Completadas - {{tareasCcount}}</ion-button>
-  <ion-button (click)="filtro = 'todas'">Todas - {{tareasTcount}}</ion-button>
+  <ion-button (click)="filtro = 'pendientes'" shape="round" color="danger">Pendientes - {{ tareasPCount }}</ion-button>
+  <ion-button (click)="filtro = 'completadas' " shape="round" color="success">Completadas - {{tareasCcount}}</ion-button>
+  <ion-button shape="round" (click)="filtro = 'todas'">Todas - {{tareasTcount}}</ion-button>
 </div>
 
-  <ion-item>
-    <ion-input labelPlacement="stacked" fill="outline" placeholder="Título de la tarea" [(ngModel)]="titulo"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-textarea fill="outline" placeholder="Descripción de la tarea" [(ngModel)]="descripcion"></ion-textarea>
-  </ion-item>
-  <div class="btncontainer">
-    <ion-button shape="round" (click)="agregarTarea()">Agregar Tarea</ion-button>
-  </div>
-
-<ion-list>
-  <ion-item *ngFor="let ta of tareasFiltradas; let i = index">
-    <ion-label>
-      <h2>{{ta.title}}</h2>
-      <p>{{ta.description}}</p>
-      <p>Status: {{ta.status}}</p>
-      <p>{{ta.date | date:'dd/MM/yyyy HH:mm' }}</p>
-    </ion-label>
-
-    <ion-button color="danger" (click)="marcarListo(ta)" *ngIf="ta.status === 'pendiente' ">
-      <ion-icon name="checkmark"></ion-icon>
-      Completar
-    </ion-button>
-
-    <ion-button size="small" color="success" *ngIf="ta.status === 'completada'">
-      ✔ Hecho
-    </ion-button>
-
-  </ion-item>
-</ion-list>
-
-
-
-
+  <ion-list>
+    <ion-item *ngFor="let ta of tareasFiltradas; let i = index">
+      <ion-label>
+        <h2>{{ta.title}}</h2>
+        <p>{{ta.description}}</p>
+        <p>Status: {{ta.status}}</p>
+        <p>{{ta.date | date:'dd/MM/yyyy HH:mm' }}</p>
+      </ion-label>
+      <ion-button  color="danger" (click)="marcarListo(ta)" *ngIf="ta.status === 'pendiente' ">
+        <ion-icon name="checkmark"></ion-icon>
+      </ion-button>
+      <ion-button size="small" color="success" *ngIf="ta.status === 'completada'">
+        ✔ 
+      </ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>

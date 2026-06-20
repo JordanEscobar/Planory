@@ -13,10 +13,12 @@ export class TaskService {
   }
 
   getPendingCount(): number {
+    this.loadTasks();
     return this.tasks.filter(t => t.status === 'pendiente').length;
   }
 
   getCompletedCount(): number {
+    this.loadTasks();
     return this.tasks.filter(t => t.status === 'completada').length;
   }
 
@@ -25,6 +27,20 @@ export class TaskService {
     if(data){
       this.tasks = JSON.parse(data) as Task[];
     }
+  }
+
+    saveTasks(): void{
+    localStorage.setItem('tareas', JSON.stringify(this.tasks));
+  }
+
+    getTasks(): Task[] {
+    this.loadTasks();
+    return this.tasks.reverse();
+  }
+
+  addTask(task: Task): void {
+    this.tasks.push(task);
+    this.saveTasks();
   }
   
 }
