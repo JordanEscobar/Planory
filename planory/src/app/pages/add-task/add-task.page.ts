@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent,IonButton, IonHeader, IonTitle, IonToolbar, IonItem, IonInput } from '@ionic/angular/standalone';
+import { IonContent,IonButton, IonHeader, IonTitle, IonToolbar, IonItem, IonInput, IonBadge } from '@ionic/angular/standalone';
 import {Task} from '../../core/models/task.model';
 import { TaskService } from 'src/app/core/services/taskService';
 
@@ -10,17 +10,19 @@ import { TaskService } from 'src/app/core/services/taskService';
   templateUrl: './add-task.page.html',
   styleUrls: ['./add-task.page.scss'],
   standalone: true,
-  imports: [IonInput, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonBadge, IonInput, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class AddTaskPage implements OnInit {
 
     title = '';
     description = '';
     tareas: Task[] = [];
+    tareasPCount: number =0;
 
   constructor(private taskService: TaskService) { }
 
   ngOnInit() {
+    this.tareasPCount = this.taskService.getPendingCount();
      }
 
     addTask(){
