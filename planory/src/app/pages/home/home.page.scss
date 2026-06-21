@@ -31,3 +31,54 @@
   justify-content: center;
   margin-top: 10px;
 }
+
+.task-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.task-desc {
+  font-size: 13px;
+  color: #666;
+}
+
+.task-meta {
+  font-size: 12px;
+  color: #999;
+}
+
+.task-card {
+   border-radius: 18px;
+  background: white;
+  margin: 12px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  transition: transform 0.15s ease;
+}
+
+.task-card:active {
+  transform: scale(0.98);
+}
+
+.check-btn {
+   border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);}
+
+.filter-btn {
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-weight: 600;
+  font-size: 13px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.filter-btn.active {
+  transform: scale(1.05);
+}
+
+ion-tab-bar {
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+}
