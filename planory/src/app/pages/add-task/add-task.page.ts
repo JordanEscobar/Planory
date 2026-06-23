@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent,IonButton, IonHeader,IonAlert, IonTitle, IonToolbar, IonItem, IonInput, IonBadge } from '@ionic/angular/standalone';
+import { IonContent,IonItem,IonButton, IonHeader,IonAlert, IonTitle, IonToolbar, IonInput, IonBadge, IonIcon } from '@ionic/angular/standalone';
 import {Task} from '../../core/models/task.model';
 import { TaskService } from 'src/app/core/services/taskService';
 
@@ -10,7 +10,7 @@ import { TaskService } from 'src/app/core/services/taskService';
   templateUrl: './add-task.page.html',
   styleUrls: ['./add-task.page.scss'],
   standalone: true,
-  imports: [IonBadge, IonInput,IonAlert, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonIcon,IonItem, IonBadge, IonInput,IonAlert, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class AddTaskPage implements OnInit {
     public alertButtons: any[] = [];

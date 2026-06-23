@@ -11,11 +11,23 @@
     </ion-toolbar>
   </ion-header>
 
+  <div class="header-form">
+    <ion-icon name="add-circle-outline"></ion-icon>
+      <div>
+        <h1>Agregar tarea</h1>
+        <p>Crea una nueva tarea para tu lista</p>
+      </div>
+    </div>
 
-  <ion-input label="Título de la tarea" [(ngModel)]="title" label-placement="floating" fill="outline" placeholder="Ingresa el título" ></ion-input>
+  <div class="addTaskContainer">
 
-  <ion-input label="Descripción de la tarea" [(ngModel)]="description" label-placement="floating" fill="outline" placeholder="Ingresa la descripción"></ion-input>
+  <ion-item lines="none">
+    <ion-input label="Título de la tarea" [(ngModel)]="title" label-placement="floating"  placeholder="Ingresa el título" ></ion-input>
+  </ion-item>
 
+  <ion-item lines="none">
+    <ion-input label="Descripción de la tarea" [(ngModel)]="description" label-placement="floating" placeholder="Ingresa la descripción"></ion-input>
+  </ion-item>
   <div class="btncontainer">
     <ion-button id="add-alert" shape="round">Agregar Tarea</ion-button>
     <ion-alert 
@@ -26,6 +38,5 @@
     </ion-alert>
   </div>
 
-
-
+  </div>
 </ion-content>
