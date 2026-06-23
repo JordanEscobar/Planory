@@ -13,9 +13,7 @@ import { TaskService } from 'src/app/core/services/taskService';
   imports: [IonBadge, IonInput,IonAlert, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class AddTaskPage implements OnInit {
-
     public alertButtons: any[] = [];
-
     title = '';
     description = '';
     tareas: Task[] = [];
@@ -44,8 +42,13 @@ export class AddTaskPage implements OnInit {
      }
 
     addTask(){
-      if(!this.title || !this.description)return;
-
+      if(!this.title || !this.description)
+      {
+        this.title = '';
+        this.description = '';
+        alert('Complete los datos correctamente');
+        return;
+      }
 
       const newTask: Task = {
         id: Date.now(),
@@ -57,10 +60,8 @@ export class AddTaskPage implements OnInit {
       this.taskService.addTask(newTask);
       this.title = '';
       this.description = '';
-      //alert('Tarea agregada exitosamente');
+      alert('Tarea agregada exitosamente');
     
-      
-      
     }
 
 }

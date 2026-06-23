@@ -12,13 +12,13 @@
   </ion-header>
 
 
-  <ion-input label="Título de la tarea" [(ngModel)]="title" label-placement="floating" fill="outline" placeholder="Ingresa el título"></ion-input>
+  <ion-input label="Título de la tarea" [(ngModel)]="title" label-placement="floating" fill="outline" placeholder="Ingresa el título" ></ion-input>
 
   <ion-input label="Descripción de la tarea" [(ngModel)]="description" label-placement="floating" fill="outline" placeholder="Ingresa la descripción"></ion-input>
 
   <div class="btncontainer">
     <ion-button id="add-alert" shape="round">Agregar Tarea</ion-button>
-    <ion-alert
+    <ion-alert 
       trigger="add-alert"
       header="Confirmar"
       message="¿Deseas guardar la tarea?"
