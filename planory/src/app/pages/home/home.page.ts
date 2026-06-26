@@ -34,10 +34,14 @@ export class HomePage {
   
   ionViewWillEnter(){
     this.tareas = this.taskService.getTasks();
-    this.tareasTcount = this.tareas.length;
-    this.tareasPCount = this.tareas.filter(t => t.status === 'pendiente').length;
-    this.tareasCcount = this.tareas.filter(t => t.status === 'completada').length;
+    this.actualizarContadores(); 
   }
+
+  actualizarContadores() {
+  this.tareasTcount = this.tareas.length;
+  this.tareasPCount = this.tareas.filter(t => t.status === 'pendiente').length;
+  this.tareasCcount = this.tareas.filter(t => t.status === 'completada').length;
+}
 
 
 get tareasFiltradas(): Task[] {
@@ -66,11 +70,13 @@ get tareasFiltradas(): Task[] {
 
   marcarListo(tarea: Task){
     tarea.status = 'completada';
+    this.tareas = [...this.tareas];
+      this.actualizarContadores();
     localStorage.setItem('tareas',JSON.stringify(this.tareas));
   }
 
-    private normalizeText(text: string): string {
-  return text
+  private normalizeText(text: string): string {
+    return text
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '');
