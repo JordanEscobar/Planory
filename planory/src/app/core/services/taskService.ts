@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../models/task.model';
+import { search } from 'ionicons/icons';
 
 @Injectable({
   providedIn: 'root',
@@ -42,5 +43,30 @@ export class TaskService {
     this.tasks.push(task);
     this.saveTasks();
   }
+
+  getTasksByDate(date: Date): Task[] {
+    return this.getTasks().filter(x => x.date.toDateString() === date.toDateString());
+  }
+
+  getTasksByStatus(status: String): Task[] {
+    return this.getTasks().filter(t => t.status === status);
+  }
+
+  getTasksByTitle(title: String): Task[]{
+    const normalizedTitle = this.normalizeText(search);
+    return this.getTasks().filter(t => this.normalizeText(t.title).includes(normalizedTitle));
+  }
+
+  getTasksByDescription(description: string): Task[]{
+    const normalizedDescription = this.normalizeText(description);
+    return this.getTasks().filter(t => this.normalizeText(t.description).includes(normalizedDescription));
+  }
+
+  private normalizeText(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
   
 }
