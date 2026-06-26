@@ -1,6 +1,6 @@
 import { Task } from './../../core/models/task.model';
 import { Component } from '@angular/core';
-import { IonHeader, IonLabel, IonIcon, IonToolbar, IonList, IonItem, IonTitle, IonContent, IonButton, IonBadge } from '@ionic/angular/standalone';
+import { IonHeader, IonLabel, IonIcon, IonToolbar, IonList, IonItem, IonTitle, IonContent, IonButton, IonBadge, IonSearchbar } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {addIcons} from 'ionicons';
@@ -13,9 +13,10 @@ import { TaskService } from '../../core/services/taskService';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonBadge, IonHeader, IonList, IonItem, IonToolbar, IonButton, IonTitle, CommonModule, FormsModule, IonContent, IonLabel, IonIcon],
+  imports: [IonSearchbar, IonBadge, IonHeader, IonList, IonItem, IonToolbar, IonButton, IonTitle, CommonModule, FormsModule, IonContent, IonLabel, IonIcon],
 })
 export class HomePage {
+  searchText = '';
 
   titulo = '';
   descripcion = '';
@@ -39,22 +40,41 @@ export class HomePage {
   }
 
 
-  get tareasFiltradas(): Task[]{
-    if(this.filtro === 'pendientes')
-    {
-      return this.tareas.filter(t => t.status === 'pendiente');
-    }
-    if(this.filtro === 'completadas')
-    {
-      return this.tareas.filter(t => t.status === 'completada');
-    }
-    return this.tareas;
+get tareasFiltradas(): Task[] {
+  let tareas = this.tareas;
+
+  // búsqueda
+  if (this.searchText.trim()) {
+    const search = this.normalizeText(this.searchText);
+
+    tareas = tareas.filter(t =>
+      this.normalizeText(t.title).includes(search)
+    );
   }
+
+  // filtro estado
+  if (this.filtro === 'pendientes') {
+    tareas = tareas.filter(t => t.status === 'pendiente');
+  }
+
+  if (this.filtro === 'completadas') {
+    tareas = tareas.filter(t => t.status === 'completada');
+  }
+
+  return tareas;
+}
 
   marcarListo(tarea: Task){
     tarea.status = 'completada';
     localStorage.setItem('tareas',JSON.stringify(this.tareas));
   }
+
+    private normalizeText(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
 
 }
 

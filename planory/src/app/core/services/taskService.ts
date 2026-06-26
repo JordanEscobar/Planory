@@ -52,21 +52,5 @@ export class TaskService {
     return this.getTasks().filter(t => t.status === status);
   }
 
-  getTasksByTitle(title: String): Task[]{
-    const normalizedTitle = this.normalizeText(search);
-    return this.getTasks().filter(t => this.normalizeText(t.title).includes(normalizedTitle));
-  }
-
-  getTasksByDescription(description: string): Task[]{
-    const normalizedDescription = this.normalizeText(description);
-    return this.getTasks().filter(t => this.normalizeText(t.description).includes(normalizedDescription));
-  }
-
-  private normalizeText(text: string): string {
-  return text
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '');
-}
   
 }

@@ -14,6 +14,13 @@
   <ion-button class="filter-btn" color="secondary"  (click)="filtro = 'todas'">Todas &nbsp; {{tareasTcount}}</ion-button>
 </div>
 
+<ion-searchbar 
+placeholder="Escribe el nombre de una tarea"
+label="Buscar tarea"
+labelPlacement="floating"
+[(ngModel)]="searchText"
+></ion-searchbar>
+
   <ion-list>
     <ion-item class="task-card" *ngFor="let ta of tareasFiltradas; let i = index">
       <ion-label>
